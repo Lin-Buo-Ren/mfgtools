@@ -63,6 +63,19 @@ parts:
     organize:
       '*': bash-completion/
 
+  # Git <2.8 has a bug that will make submodule cloning error with the
+  # "fatal: reference is not a tree: _GIT_HASH_" message, upgrade it
+  # to avoid the problem
+  # https://stackoverflow.com/a/17692710/6219078
+  recent-git:
+    plugin: nil
+    build-packages:
+      - software-properties-common
+    override-pull: |
+      add-apt-repository ppa:git-core/ppa
+      apt-get update
+      apt-get install -y --no-install-recommends git
+
   # Check out the tagged release revision if it isn't promoted to the stable channel
   # https://forum.snapcraft.io/t/selective-checkout-check-out-the-tagged-release-revision-if-it-isnt-promoted-to-the-stable-channel/10617
   selective-checkout:
@@ -82,6 +95,7 @@ parts:
 
   main:
     after:
+      - recent-git
       - selective-checkout
 
     source: .
