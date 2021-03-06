@@ -17,7 +17,7 @@
 # Copyright (c) 2017 Snapcrafters
 #
 
-name: universal-update-utility
+name: universal-update-utility-brlin
 title: Universal Update Utility - UUU
 summary: Freescale/NXP I.MX Chip image deploy tools
 description: |
